@@ -25,21 +25,44 @@ class HomeScreen extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         selectedItemColor: Theme.of(context).colorScheme.onPrimary,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(defaultSpace),
-        child: Column(
-          children: const [
-            Expanded(
-              child: NutritionalEvaluationWidget(),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/images/background/top-view-of-immunity-boosting-foods-with-vegetables-and-fish.jpg",
+                ),
+                fit: BoxFit.cover,
+                opacity: 0.5,
+              ),
             ),
-            SizedBox(
-              height: largeSpace,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(defaultSpace),
+            child: Column(
+              children: [
+                const Expanded(
+                  child: NutritionalEvaluationWidget(),
+                ),
+                ElevatedButton(
+                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Menü leeren"),
+                    ),
+                  ),
+                  child: const Text("Zurücksetzen"),
+                ),
+                const SizedBox(
+                  height: largeSpace,
+                ),
+                const Expanded(
+                  child: WeightWidget(),
+                ),
+              ],
             ),
-            Expanded(
-              child: WeightWidget(),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

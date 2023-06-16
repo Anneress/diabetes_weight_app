@@ -1,3 +1,4 @@
+import 'package:diabetes_weight_app/src/products/presentation/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home.dart';
@@ -13,15 +14,16 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.teal,
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+        ),
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.tealAccent,
-      ),
-      home: const HomeScreen(),
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const HomeScreen(),
+        "/products": (context) => const ProductScreen(),
+      },
     );
   }
 }

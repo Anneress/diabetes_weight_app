@@ -10,7 +10,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
       ),
       padding: const EdgeInsets.all(defaultSpace),
       child: SingleChildScrollView(
