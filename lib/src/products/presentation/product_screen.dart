@@ -1,5 +1,5 @@
 import 'package:diabetes_weight_app/src/menu/domain/menu_entry.dart';
-import 'package:diabetes_weight_app/src/menu/menu.dart';
+import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/products/presentation/product_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +38,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                     .read(productScreenControllerProvider.notifier)
                     .findProducts(value: value);
               },
+              // TODO: Mehr als ein Wort beheben
             ),
             Expanded(
               child: controller.when(
@@ -49,14 +50,16 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                         child: ListTile(
                           onTap: null,
                           trailing: IconButton(
-                            onPressed: () =>
-                                ref.read(menuProvider.notifier).add(
-                                      MenuEntry(
-                                        product: data[index],
-                                        portionSizeInGram:
-                                            data[index].averagePortionSize ?? 0,
-                                      ),
+                            onPressed: () {
+                              ref.read(menuProvider.notifier).add(
+                                    MenuEntry(
+                                      product: data[index],
+                                      portionSizeInGram:
+                                          data[index].averagePortionSize ?? 0,
                                     ),
+                                  );
+                              Navigator.of(context).pop();
+                            },
                             icon: const Icon(Icons.add),
                           ),
                           title: Text(

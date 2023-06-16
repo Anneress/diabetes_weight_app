@@ -1,5 +1,5 @@
 import 'package:diabetes_weight_app/src/menu/domain/menu_entry.dart';
-import 'package:diabetes_weight_app/src/menu/menu.dart';
+import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/products/domain/product.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -19,7 +19,7 @@ void main() {
     );
 
     menu.add(entry);
-    expect(menu.entries, [entry]);
+    expect(menu, [entry]);
   });
 
   test('Add different menu entries to menu', () {
@@ -36,9 +36,7 @@ void main() {
       portionSizeInGram: 100,
     );
 
-    final Menu menu = Menu(
-      entries: [entry],
-    );
+    final Menu menu = Menu();
 
     final Product product2 = Product(
       id: "2",
@@ -55,27 +53,6 @@ void main() {
 
     menu.add(entry2);
 
-    expect(menu.entries, [entry, entry2]);
-  });
-
-  test("add two entries to menu and check totalCarbs", () {
-    final Product product = Product(
-      id: "1",
-      name: "test",
-      carbs: 10,
-      averagePortionSize: 100,
-      categoryId: "1",
-    );
-
-    final MenuEntry entry = MenuEntry(
-      product: product,
-      portionSizeInGram: 100,
-    );
-
-    final Menu menu = Menu(
-      entries: [entry, entry],
-    );
-
-    expect(menu.totalCarbs, 20);
+    expect(menu, [entry, entry2]);
   });
 }

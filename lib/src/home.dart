@@ -1,6 +1,6 @@
-import 'package:diabetes_weight_app/src/nutritional_evaluation_widget.dart';
+import 'package:diabetes_weight_app/src/menu/presentation/nutritional_evaluation_widget.dart';
+import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/style_constants.dart';
-import 'package:diabetes_weight_app/src/weight_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,6 +25,23 @@ class HomeScreen extends ConsumerWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         selectedItemColor: Theme.of(context).colorScheme.onPrimary,
       ),
+      floatingActionButton: Wrap(
+        alignment: WrapAlignment.end,
+        spacing: 18,
+        children: [
+          FloatingActionButton(
+            heroTag: "clearMenu",
+            onPressed: () => ref.read(menuProvider.notifier).clear(),
+            child: const Icon(Icons.restart_alt_rounded),
+          ),
+          FloatingActionButton(
+            heroTag: "addProduct",
+            onPressed: () => Navigator.of(context).pushNamed("/products"),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            child: const Icon(Icons.add),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Container(
@@ -38,26 +55,14 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(defaultSpace),
+          const Padding(
+            padding: EdgeInsets.all(defaultSpace),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Expanded(
-                  child: NutritionalEvaluationWidget(),
-                ),
-                ElevatedButton(
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Menü leeren"),
-                    ),
-                  ),
-                  child: const Text("Zurücksetzen"),
-                ),
-                const SizedBox(
+                NutritionalEvaluationWidget(),
+                SizedBox(
                   height: largeSpace,
-                ),
-                const Expanded(
-                  child: WeightWidget(),
                 ),
               ],
             ),
