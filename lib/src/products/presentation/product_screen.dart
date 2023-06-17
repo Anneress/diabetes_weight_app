@@ -38,7 +38,6 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                     .read(productScreenControllerProvider.notifier)
                     .findProducts(value: value);
               },
-              // TODO: Mehr als ein Wort beheben
             ),
             Expanded(
               child: controller.when(

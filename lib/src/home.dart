@@ -10,21 +10,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.scale),
-            label: "weight",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "settings",
-          ),
-        ],
-        onTap: (value) => print(value),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-      ),
       floatingActionButton: Wrap(
         alignment: WrapAlignment.end,
         spacing: 18,
@@ -59,11 +44,11 @@ class HomeScreen extends ConsumerWidget {
             padding: EdgeInsets.all(defaultSpace),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                NutritionalEvaluationWidget(),
-                SizedBox(
-                  height: largeSpace,
-                ),
+                Spacer(flex: 2),
+                Expanded(flex: 3, child: NutritionalEvaluationWidget()),
+                Spacer(),
               ],
             ),
           ),

@@ -36,10 +36,15 @@ class BlsSqliteProductsRepository implements ProductsRepository {
     if (value == null) {
       products = await db?.query("products", limit: 100);
     } else {
+      final words = value.split(" ");
+      // Search for multiple words ignoring order
+      final wordsInst = words.map((e) => e != words.first
+          ? ' and instr(lower("name"), lower(?)) > 0'
+          : 'instr(lower("name"), lower(?)) > 0');
       products = await db?.query(
         "products",
-        where: 'instr("name", ?) > 0',
-        whereArgs: [value],
+        where: wordsInst.join(),
+        whereArgs: words,
         limit: 100,
       );
     }
