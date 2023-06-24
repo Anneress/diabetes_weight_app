@@ -1,4 +1,4 @@
-import 'package:diabetes_weight_app/src/menu/presentation/nutritional_evaluation_widget.dart';
+import 'package:diabetes_weight_app/src/ui/nutritional_evaluation_widget.dart';
 import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/style_constants.dart';
 import 'package:flutter/material.dart';

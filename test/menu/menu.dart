@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('Add menu entry to empty menu', () {
-    final Menu menu = Menu();
+    final MenuNotifier menu = MenuNotifier();
     final Product product = Product(
       id: "1",
       name: "test",
@@ -36,7 +36,7 @@ void main() {
       portionSizeInGram: 100,
     );
 
-    final Menu menu = Menu();
+    final MenuNotifier menu = MenuNotifier();
 
     final Product product2 = Product(
       id: "2",

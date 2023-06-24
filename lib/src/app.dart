@@ -1,7 +1,7 @@
-import 'package:diabetes_weight_app/src/products/presentation/product_screen.dart';
+import 'package:diabetes_weight_app/src/ui/product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'home.dart';
+import 'ui/home.dart';
 
 final themeModeProvider = StateProvider<ThemeMode?>(
   (ref) => ThemeMode.system,

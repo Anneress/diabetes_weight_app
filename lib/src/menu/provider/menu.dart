@@ -2,12 +2,13 @@
 import 'package:diabetes_weight_app/src/menu/domain/menu_entry.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final menuProvider = StateNotifierProvider<Menu, List<MenuEntry>>((ref) {
-  return Menu();
+final menuProvider =
+    StateNotifierProvider<MenuNotifier, List<MenuEntry>>((ref) {
+  return MenuNotifier();
 });
 
-class Menu extends StateNotifier<List<MenuEntry>> {
-  Menu() : super(const []);
+class MenuNotifier extends StateNotifier<List<MenuEntry>> {
+  MenuNotifier() : super(const []);
 
   void add(MenuEntry entry) {
     state = [...state, entry];

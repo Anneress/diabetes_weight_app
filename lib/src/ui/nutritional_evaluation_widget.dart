@@ -26,57 +26,67 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
             showEditIcon: true,
             onTap: () async => await showModalBottomSheet(
                 // TODO: Auslagern, sodass auch direkt in Produktauswahl aufrufbar
+                isScrollControlled: true,
                 context: context,
                 builder: (context) {
                   final index = menuEntries.indexOf(e);
                   var portionSize = e.portionSizeInGram;
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          CloseButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(defaultSpace),
-                        child: SpinBox(
-                          decimals: 1,
-                          min: 0,
-                          max: 1000,
-                          value: portionSize,
-                          onChanged: (p0) =>
-                              ref.read(menuProvider.notifier).update(
-                                    ref.read(menuProvider)[index],
-                                    e.copyWith(
-                                      portionSizeInGram: p0,
-                                    ),
-                                  ),
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: defaultSpace,
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                      right: defaultSpace,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(e.product.name),
+                            const Spacer(),
+                            CloseButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                            ),
+                          ],
                         ),
-                      ),
-                      Wrap(
-                        direction: Axis.horizontal,
-                        alignment: WrapAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              ref.read(menuProvider.notifier).update(
-                                    ref.read(menuProvider)[index],
-                                    e.copyWith(
-                                      portionSizeInGram:
-                                          e.product.averagePortionSize,
+                        Padding(
+                          padding: const EdgeInsets.all(defaultSpace),
+                          child: SpinBox(
+                            decimals: 1,
+                            min: 0,
+                            max: 1000,
+                            value: portionSize,
+                            onChanged: (p0) =>
+                                ref.read(menuProvider.notifier).update(
+                                      ref.read(menuProvider)[index],
+                                      e.copyWith(
+                                        portionSizeInGram: p0,
+                                      ),
                                     ),
-                                  );
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("Standardwert"),
                           ),
-                        ],
-                      )
-                    ],
+                        ),
+                        Wrap(
+                          direction: Axis.horizontal,
+                          alignment: WrapAlignment.end,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                ref.read(menuProvider.notifier).update(
+                                      ref.read(menuProvider)[index],
+                                      e.copyWith(
+                                        portionSizeInGram:
+                                            e.product.averagePortionSize,
+                                      ),
+                                    );
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("Standardwert"),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   );
                 }),
           ),
