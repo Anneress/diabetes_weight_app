@@ -34,18 +34,17 @@ class BlsSqliteProductsRepository implements ProductsRepository {
     }
     List<Map<String, Object?>>? products;
     if (value == null) {
-      products = await db?.query("products", limit: 100);
+      products = await db?.query("products", limit: 100, orderBy: 'name');
     } else {
       final words = value.split(" ");
       // Search for multiple words ignoring order
-      final wordsInst = words.map((e) => e != words.first
-          ? ' and instr(lower("name"), lower(?)) > 0'
-          : 'instr(lower("name"), lower(?)) > 0');
+      final wordsInst = words.map((e) => 'instr(lower("name"), lower(?)) > 0');
       products = await db?.query(
         "products",
-        where: wordsInst.join(),
+        where: wordsInst.join(' and '),
         whereArgs: words,
         limit: 100,
+        orderBy: 'name',
       );
     }
     return products?.map((e) => Product.fromMap(e)).toList();

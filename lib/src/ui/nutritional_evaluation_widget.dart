@@ -16,6 +16,8 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
           DataCell(
             Text(
               e.product.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           DataCell(
@@ -33,6 +35,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
                   var portionSize = e.portionSizeInGram;
                   return Padding(
                     padding: EdgeInsets.only(
+                      top: defaultSpace,
                       left: defaultSpace,
                       bottom: MediaQuery.of(context).viewInsets.bottom,
                       right: defaultSpace,
@@ -41,17 +44,23 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(e.product.name),
-                            const Spacer(),
+                            Flexible(
+                              child: Text(
+                                e.product.name,
+                                maxLines: 3,
+                              ),
+                            ),
+                            const SizedBox(width: defaultSpace),
                             CloseButton(
                               onPressed: () => Navigator.of(context).pop(),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(defaultSpace),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: smallSpace,
+                          ),
                           child: SpinBox(
                             decimals: 1,
                             min: 0,
@@ -103,7 +112,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
-        color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.85),
+        color: Theme.of(context).colorScheme.tertiaryContainer.withOpacity(0.9),
       ),
       padding: const EdgeInsets.all(defaultSpace),
       child: SingleChildScrollView(
@@ -111,7 +120,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
         child: DataTable(
           columnSpacing: 18,
           horizontalMargin: 18,
-          dividerThickness: 2,
+          dividerThickness: 1,
           columns: const [
             DataColumn(
               label: Text("Produkt"),

@@ -14,6 +14,10 @@ class MenuNotifier extends StateNotifier<List<MenuEntry>> {
     state = [...state, entry];
   }
 
+  void addAll(List<MenuEntry> entries) {
+    state = [...state, ...entries];
+  }
+
   void remove(MenuEntry entry) {
     state = state.where((element) => element != entry).toList();
   }

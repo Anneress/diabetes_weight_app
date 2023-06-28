@@ -16,8 +16,9 @@ class App extends ConsumerWidget {
       themeMode: ThemeMode.light,
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
+          seedColor: Color.fromARGB(255, 20, 231, 210),
         ),
+        useMaterial3: true,
       ),
       initialRoute: "/",
       routes: {
