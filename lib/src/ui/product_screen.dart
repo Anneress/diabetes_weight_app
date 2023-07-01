@@ -3,6 +3,7 @@ import 'package:diabetes_weight_app/src/menu/provider/card.dart';
 import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/products/presentation/product_screen_controller.dart';
 import 'package:diabetes_weight_app/src/style_constants.dart';
+import 'package:diabetes_weight_app/src/ui/change_portion_size_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -145,7 +146,19 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                               "${entry.portionSizeInGram} g",
                             ),
                             IconButton(
-                              onPressed: null,
+                              onPressed: () async {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  isDismissible: true,
+                                  showDragHandle: true,
+                                  context: context,
+                                  builder: (context) => ChangePortionSizeDialog(
+                                    menuEntryIndex: index,
+                                    menuProvider: cardProvider,
+                                  ),
+                                );
+                              },
                               icon: const Icon(Icons.edit_rounded),
                             ),
                           ],

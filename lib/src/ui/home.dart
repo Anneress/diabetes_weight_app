@@ -40,15 +40,71 @@ class HomeScreen extends ConsumerWidget {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(defaultSpace),
+          Padding(
+            padding: const EdgeInsets.all(defaultSpace),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Spacer(flex: 2),
-                Expanded(flex: 3, child: NutritionalEvaluationWidget()),
-                Spacer(),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      Container(
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primaryContainer
+                              .withOpacity(0.9),
+                          shape: const CircleBorder(),
+                        ),
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(largeSpace),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.fastfood_rounded),
+                            const SizedBox(height: smallSpace),
+                            Text(
+                              "${(ref.watch(menuTotalCarbsProvider) ?? 0).toStringAsFixed(2)} g"
+                                  .padLeft(7, "0"),
+                              maxLines: 1,
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: smallSpace,
+                      ),
+                      Container(
+                        decoration: ShapeDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.9),
+                          shape: const CircleBorder(),
+                        ),
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(defaultSpace),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.scale_rounded),
+                            Text(
+                              "${(ref.watch(menuTotalWeightProvider) ?? 0).toStringAsFixed(1).padLeft(5, "0")} g",
+                              maxLines: 1,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Expanded(flex: 2, child: NutritionalEvaluationWidget()),
+                const Spacer(),
               ],
             ),
           ),
