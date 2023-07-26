@@ -1,11 +1,11 @@
 import 'package:diabetes_weight_app/src/products/domain/category.dart';
 import 'package:diabetes_weight_app/src/products/domain/product.dart';
-import 'package:diabetes_weight_app/src/sqlite/sqlite_client.dart';
+import 'package:diabetes_weight_app/src/products/data/bls_db_client_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
 
 final productsRepositoryProvider = Provider((ref) {
-  final db = ref.watch(sqliteDbProvider);
+  final db = ref.watch(blsDbProvider);
   return BlsSqliteProductsRepository(db: db.value);
 });
 

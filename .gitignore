@@ -42,4 +42,4 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-lib/src/sqlite/bls_products_key.dart
+lib/src/products/data/bls_db_key.dart
