@@ -49,9 +49,23 @@ class BlsSqliteProductsRepository implements ProductsRepository {
     }
     return products?.map((e) => Product.fromMap(e)).toList();
   }
+
+  @override
+  Future<Product?> findProductById(String id) async {
+    if (db != null && !db!.isOpen) {
+      throw Exception("Database is not open");
+    }
+    final result =
+        await db?.query("products", where: 'id = ?', whereArgs: [id]);
+    if (result != null && result.isNotEmpty) {
+      return Product.fromMap(result.first);
+    }
+    return null;
+  }
 }
 
 abstract class ProductsRepository {
   Future<List<Category>?> loadCategorys();
   Future<List<Product>?> findProducts({String? value});
+  Future<Product?> findProductById(String id);
 }
