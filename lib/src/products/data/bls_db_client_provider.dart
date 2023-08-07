@@ -1,9 +1,10 @@
 import 'dart:io';
-import 'package:diabetes_weight_app/src/products/data/bls_db_key.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
+
+const blsProductsKey = String.fromEnvironment("BLSPRODUCTSKEY");
 
 final blsDbProvider = FutureProvider<Database>((ref) async {
   var databasesPath = await getDatabasesPath();
