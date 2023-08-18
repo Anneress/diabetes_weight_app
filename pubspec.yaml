@@ -3,7 +3,7 @@ description: App zur Berechnung von Kohlenhydraten für Lebensmittel pro Portion
 
 publish_to: 'none' 
 
-version: 1.0.2+1
+version: 1.0.3+1
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
