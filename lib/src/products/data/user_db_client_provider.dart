@@ -15,9 +15,6 @@ final userDbClientProvider = FutureProvider((ref) async {
     await db.execute(
       "CREATE TABLE favourites (id INTEGER PRIMARY KEY, productId INTEGER, portionSizeInGram REAL)",
     );
-    await db.execute(
-      "CREATE TABLE last (id INTEGER PRIMARY KEY, productId INTEGER, portionSizeInGram REAL)",
-    );
   } else {
     db = await openDatabase(path);
   }

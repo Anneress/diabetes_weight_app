@@ -16,9 +16,7 @@ class BlsSqliteProductsRepository implements ProductsRepository {
 
   @override
   Future<List<Category>?> loadCategorys() async {
-    if (db != null && !db!.isOpen) {
-      throw Exception("Database is not open");
-    }
+    checkIfDbIsOpen();
     final categorys = await db?.query("categorys");
     return categorys
         ?.map(
@@ -29,9 +27,7 @@ class BlsSqliteProductsRepository implements ProductsRepository {
 
   @override
   Future<List<Product>?> findProducts({String? value}) async {
-    if (db != null && !db!.isOpen) {
-      throw Exception("Database is not open");
-    }
+    checkIfDbIsOpen();
     List<Map<String, Object?>>? products;
     if (value == null) {
       products = await db?.query("products", limit: 100, orderBy: 'name');
@@ -52,15 +48,19 @@ class BlsSqliteProductsRepository implements ProductsRepository {
 
   @override
   Future<Product?> findProductById(String id) async {
-    if (db != null && !db!.isOpen) {
-      throw Exception("Database is not open");
-    }
+    checkIfDbIsOpen();
     final result =
         await db?.query("products", where: 'id = ?', whereArgs: [id]);
     if (result != null && result.isNotEmpty) {
       return Product.fromMap(result.first);
     }
     return null;
+  }
+
+  void checkIfDbIsOpen() {
+    if (db != null && !db!.isOpen) {
+      throw Exception("Database is not open");
+    }
   }
 }
 
