@@ -20,3 +20,14 @@ App zur Berechnung von Kohlenhydraten an Hand des Gewichts, welches manuell eing
     - Bearbeiten von Produkten
     - Entfernen von Produkten aus Menü
     - Berechnung der gesamten Kohlenhydrate des Menüs
+
+```mermaid
+journey
+    title Calculate Carbs
+    section Create Menu
+    Press Floating Button: 1: User
+    Search for Product: 3: User
+    Add Product to Card: 1: User
+    section Calculation
+    Multiplicate Carbs per Portion to Portion Size: 5: System
+```
