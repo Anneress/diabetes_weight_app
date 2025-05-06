@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WeightWidget extends ConsumerWidget {
-  const WeightWidget({Key? key}) : super(key: key);
+  const WeightWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

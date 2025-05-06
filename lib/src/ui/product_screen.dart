@@ -1,5 +1,3 @@
-import 'package:diabetes_weight_app/src/menu/domain/menu_entry.dart';
-import 'package:diabetes_weight_app/src/menu/provider/card.dart';
 import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/products/presentation/product_screen_controller.dart';
 import 'package:diabetes_weight_app/src/style_constants.dart';
@@ -43,13 +41,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                       itemBuilder: (context, index) => Card(
                         child: ListTile(
                           onTap: () {
-                            ref.read(cardProvider.notifier).add(
-                                  MenuEntry(
-                                    product: data[index],
-                                    portionSizeInGram:
-                                        data[index].averagePortionSize ?? 0,
-                                  ),
-                                );
+                            //TODO
                           },
                           trailing: const Icon(Icons.add),
                           title: Text(
@@ -120,9 +112,9 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                 Flexible(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: ref.watch(cardProvider).length,
+                    itemCount: 0,
                     itemBuilder: (context, index) {
-                      final entry = ref.watch(cardProvider)[index];
+                      // final entry = ref.watch(cardProvider)[index];
                       return ListTile(
                         leadingAndTrailingTextStyle: Theme.of(context)
                             .textTheme
@@ -131,11 +123,10 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                         titleTextStyle: Theme.of(context).textTheme.bodyMedium,
                         leading: IconButton(
                           icon: const Icon(Icons.delete_rounded),
-                          onPressed: () =>
-                              ref.read(cardProvider.notifier).remove(entry),
+                          onPressed: null // () => ref.read(cardProvider.notifier).remove(entry),
                         ),
                         title: Text(
-                          entry.product.name,
+                          "TODO", // entry.product.name,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -143,7 +134,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "${entry.portionSizeInGram} g",
+                              "TODO",//"${entry.portionSizeInGram} g",
                             ),
                             IconButton(
                               onPressed: () async {
@@ -155,7 +146,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                                   context: context,
                                   builder: (context) => ChangePortionSizeDialog(
                                     menuEntryIndex: index,
-                                    menuProvider: cardProvider,
+                                    menuProvider: menuProvider,
                                   ),
                                 );
                               },
@@ -167,28 +158,6 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                     },
                   ),
                 ),
-                if (ref.watch(cardProvider).isNotEmpty)
-                  Wrap(
-                    spacing: defaultSpace,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          ref.read(cardProvider.notifier).clear();
-                        },
-                        child: const Text("Verwerfen"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          ref.read(menuProvider.notifier).addAll(
-                                ref.read(cardProvider),
-                              );
-                          ref.read(cardProvider.notifier).clear();
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Hinzufügen"),
-                      ),
-                    ],
-                  ),
               ],
             ),
           ),
