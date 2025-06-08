@@ -63,7 +63,7 @@ class ChangePortionSizeDialog extends ConsumerWidget {
                         menuEntry,
                         menuEntry.copyWith(
                           portionSizeInGram:
-                              menuEntry.product.averagePortionSize,
+                              menuEntry.product.averagePortionSize ?? 0,
                         ),
                       );
                   Navigator.of(context).pop();

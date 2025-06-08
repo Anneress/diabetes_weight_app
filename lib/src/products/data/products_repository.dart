@@ -20,7 +20,7 @@ class BlsSqliteProductsRepository implements ProductsRepository {
     final categorys = await db?.query("categorys");
     return categorys
         ?.map(
-          (e) => Category.fromMap(e),
+          (e) => Category.fromJson(e),
         )
         .toList();
   }
@@ -43,7 +43,7 @@ class BlsSqliteProductsRepository implements ProductsRepository {
         orderBy: 'name',
       );
     }
-    return products?.map((e) => Product.fromMap(e)).toList();
+    return products?.map((e) => Product.fromJson(e)).toList();
   }
 
   @override
@@ -52,7 +52,7 @@ class BlsSqliteProductsRepository implements ProductsRepository {
     final result =
         await db?.query("products", where: 'id = ?', whereArgs: [id]);
     if (result != null && result.isNotEmpty) {
-      return Product.fromMap(result.first);
+      return Product.fromJson(result.first);
     }
     return null;
   }
