@@ -31,24 +31,24 @@ class MenuNotifier extends StateNotifier<List<MenuEntry>> {
   }
 }
 
-final menuTotalCarbsProvider = Provider<double?>((ref) {
+final menuTotalCarbsProvider = Provider<double>((ref) {
   final entries = ref.watch(menuProvider);
 
   if (entries.isEmpty) {
-    return null;
+    return 0;
   }
   num sum = 0;
   for (var element in entries) {
-    sum += element.carbs ?? 0;
+    sum += element.carbs;
   }
   return sum.toDouble();
 });
 
-final menuTotalWeightProvider = Provider<double?>((ref) {
+final menuTotalWeightProvider = Provider<double>((ref) {
   final entries = ref.watch(menuProvider);
 
   if (entries.isEmpty) {
-    return null;
+    return 0;
   }
   num sum = 0;
   for (var element in entries) {

@@ -15,8 +15,9 @@ class App extends ConsumerWidget {
     return MaterialApp(
       themeMode: ThemeMode.light,
       theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 20, 231, 210),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.green,
+          accentColor: Colors.orange
         ),
         useMaterial3: true,
       ),

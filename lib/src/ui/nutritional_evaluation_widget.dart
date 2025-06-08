@@ -14,7 +14,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
-        color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.9),
       ),
       padding: const EdgeInsets.all(defaultSpace),
       child: SingleChildScrollView(
@@ -75,7 +75,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
                         ),
                         DataCell(
                           Text(
-                            "${(e.carbs ?? 0).toStringAsFixed(2)} g",
+                            "${e.carbs.toStringAsFixed(2)} g",
                             maxLines: 1,
                           ),
                         ),

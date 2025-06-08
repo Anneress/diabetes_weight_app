@@ -27,13 +27,13 @@ class UserDbFavouritesRepository implements FavouritesRepository {
     final res = value != null
         ? await db?.query("favourites", where: 'id = ?', whereArgs: [value])
         : await db?.query("favourites");
-    return res?.map((e) => Favourite.fromMap(e)).toList();
+    return res?.map((e) => Favourite.fromJson(e)).toList();
   }
 
   @override
   Future<void> storeFavourite(Favourite favourite) async {
     checkIfDbIsOpen();
-    final id = await db?.insert("favourites", favourite.toMap());
+    final id = await db?.insert("favourites", favourite.toJson());
     if (id == 0) {
       throw DidNotStoreFavouriteError(favourite);
     }

@@ -17,12 +17,12 @@ class HomeScreen extends ConsumerWidget {
           FloatingActionButton(
             heroTag: "clearMenu",
             onPressed: () => ref.read(menuProvider.notifier).clear(),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             child: const Icon(Icons.restart_alt_rounded),
           ),
           FloatingActionButton(
             heroTag: "addProduct",
             onPressed: () => Navigator.of(context).pushNamed("/products"),
-            backgroundColor: Theme.of(context).colorScheme.primary,
             child: const Icon(Icons.add),
           ),
         ],
@@ -31,12 +31,13 @@ class HomeScreen extends ConsumerWidget {
         children: [
           Container(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  "assets/images/background/top-view-of-immunity-boosting-foods-with-vegetables-and-fish.jpg",
-                ),
-                fit: BoxFit.cover,
-                opacity: 0.5,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFFA8E063), // Frisches Grün
+                  Color(0xFFFFD200), // Warmes Orange
+                ],
               ),
             ),
           ),
@@ -53,10 +54,7 @@ class HomeScreen extends ConsumerWidget {
                       const Spacer(),
                       Container(
                         decoration: ShapeDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .primaryContainer
-                              .withOpacity(0.9),
+                          color: Theme.of(context).colorScheme.primary,
                           shape: const CircleBorder(),
                         ),
                         alignment: Alignment.center,
@@ -64,13 +62,18 @@ class HomeScreen extends ConsumerWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.fastfood_rounded),
+                            const Icon(
+                              Icons.fastfood_rounded,
+                              color: Colors.white
+                            ),
                             const SizedBox(height: smallSpace),
                             Text(
-                              "${(ref.watch(menuTotalCarbsProvider) ?? 0).toStringAsFixed(2)} g"
-                                  .padLeft(7, "0"),
+                              "${ref.watch(menuTotalCarbsProvider).toStringAsFixed(2)} g"
+                                  .padLeft(7, " "),
                               maxLines: 1,
-                              style: Theme.of(context).textTheme.displaySmall,
+                              style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),
@@ -80,10 +83,7 @@ class HomeScreen extends ConsumerWidget {
                       ),
                       Container(
                         decoration: ShapeDecoration(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withOpacity(0.9),
+                          color: Theme.of(context).colorScheme.secondary,
                           shape: const CircleBorder(),
                         ),
                         alignment: Alignment.center,
@@ -91,11 +91,13 @@ class HomeScreen extends ConsumerWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.scale_rounded),
+                            const Icon(Icons.scale_rounded, color: Colors.white),
                             Text(
-                              "${(ref.watch(menuTotalWeightProvider) ?? 0).toStringAsFixed(1).padLeft(5, "0")} g",
+                              "${ref.watch(menuTotalWeightProvider).toStringAsFixed(1).padLeft(5, " ")} g",
                               maxLines: 1,
-                              style: Theme.of(context).textTheme.bodyLarge,
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                ),
                             ),
                           ],
                         ),
