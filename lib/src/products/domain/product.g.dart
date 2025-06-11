@@ -9,7 +9,7 @@ part of 'product.dart';
 _Product _$ProductFromJson(Map<String, dynamic> json) => _Product(
       id: json['id'] as String,
       name: json['name'] as String,
-      carbs: (json['carbs'] as num?)?.toDouble(),
+      carbs: mgToGram(json['carbs'] as num?),
       averagePortionSize: (json['averagePortionSize'] as num?)?.toDouble(),
       categoryId: json['categoryId'] as String,
     );

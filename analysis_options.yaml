@@ -27,3 +27,9 @@ linter:
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+# ignore invalid_annotation_target for freezed classes like described in the documentation 
+# https://pub.dev/packages/freezed#disabling-invalid_annotation_target-warning-and-warning-in-generates-files
+analyzer:
+  errors:
+    invalid_annotation_target: ignore

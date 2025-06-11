@@ -17,6 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$Product {
   String get id;
   String get name;
+  @JsonKey(fromJson: mgToGram)
   double? get carbs;
   double? get averagePortionSize;
   String get categoryId;
@@ -64,7 +65,7 @@ abstract mixin class $ProductCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      double? carbs,
+      @JsonKey(fromJson: mgToGram) double? carbs,
       double? averagePortionSize,
       String categoryId});
 }
@@ -118,7 +119,7 @@ class _Product implements Product {
   const _Product(
       {required this.id,
       required this.name,
-      this.carbs,
+      @JsonKey(fromJson: mgToGram) this.carbs,
       this.averagePortionSize,
       required this.categoryId});
   factory _Product.fromJson(Map<String, dynamic> json) =>
@@ -129,6 +130,7 @@ class _Product implements Product {
   @override
   final String name;
   @override
+  @JsonKey(fromJson: mgToGram)
   final double? carbs;
   @override
   final double? averagePortionSize;
@@ -184,7 +186,7 @@ abstract mixin class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      double? carbs,
+      @JsonKey(fromJson: mgToGram) double? carbs,
       double? averagePortionSize,
       String categoryId});
 }

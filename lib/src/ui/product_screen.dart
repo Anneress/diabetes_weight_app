@@ -1,3 +1,4 @@
+import 'package:diabetes_weight_app/src/menu/domain/menu_entry.dart';
 import 'package:diabetes_weight_app/src/menu/provider/menu.dart';
 import 'package:diabetes_weight_app/src/products/presentation/product_screen_controller.dart';
 import 'package:diabetes_weight_app/src/style_constants.dart';
@@ -41,7 +42,12 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                       itemBuilder: (context, index) => Card(
                         child: ListTile(
                           onTap: () {
-                            //TODO
+                            ref.read(menuProvider.notifier).add(
+                              MenuEntry(
+                                product: data[index], 
+                                portionSizeInGram: data[index].averagePortionSize ?? 0,
+                              ),
+                            );
                           },
                           trailing: const Icon(Icons.add),
                           title: Text(

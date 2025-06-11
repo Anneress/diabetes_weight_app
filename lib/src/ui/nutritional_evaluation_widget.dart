@@ -14,7 +14,14 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(defaultRadius)),
-        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.9),
+        color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.92),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          )
+        ]
       ),
       padding: const EdgeInsets.all(defaultSpace),
       child: SingleChildScrollView(
@@ -23,7 +30,23 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
           showCheckboxColumn: true,
           columnSpacing: smallSpace,
           horizontalMargin: smallSpace,
-          dividerThickness: 1,
+          dividerThickness: 2,
+          headingRowColor: WidgetStateProperty.all(const Color(0xFFA8E063)), // Frisches Grün
+          headingTextStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 16,
+            letterSpacing: 0.5,
+          ),
+          dataRowColor: WidgetStateProperty.resolveWith<Color?>(
+            (states) => states.contains(WidgetState.selected)
+                ? const Color(0xFFFFF9C4) // Helles Gelb bei Auswahl
+                : Theme.of(context).colorScheme.surface.withValues(alpha: 0.97),
+          ),
+          dataTextStyle: const TextStyle(
+            color: Colors.black87,
+            fontSize: 15,
+          ),
           columns: const [
             DataColumn(
               label: Text("Produkt"),
@@ -83,6 +106,7 @@ class NutritionalEvaluationWidget extends ConsumerWidget {
                     ),
                   )
                   .toList(),
+          
         ),
       ),
     );

@@ -8,7 +8,7 @@ abstract class Product with _$Product {
   const factory Product({
     required String id,
     required String name,
-    double? carbs,
+    @JsonKey(fromJson: mgToGram) double? carbs,
     double? averagePortionSize,
     required String categoryId,
   }) = _Product;
@@ -16,3 +16,5 @@ abstract class Product with _$Product {
   factory Product.fromJson(Map<String, Object?> json) =>
       _$ProductFromJson(json);
 }
+
+double? mgToGram(num? value) => value == null ? null : value / 1000;
